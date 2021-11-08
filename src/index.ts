@@ -112,7 +112,7 @@ const runSlither = async (): Promise<string> => {
       stdout: (data: Buffer) => output += data.toString()
     };
     options.cwd = projectPath;
-
+    exec.exec("yarn clean", undefined, options).then(() => resolve(output)).catch(() => resolve(output));
     exec.exec("slither --json - . " + slitherParams, undefined, options).then(() => resolve(output)).catch(() => resolve(output));
   })
 }
